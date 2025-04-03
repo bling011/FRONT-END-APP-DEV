@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/bling011/FRONT-END-APP-DEV.git/static/css/main.a85c44ee.css",
-    "main.js": "/bling011/FRONT-END-APP-DEV.git/static/js/main.4b1c08d5.js",
-    "static/js/453.5f715be2.chunk.js": "/bling011/FRONT-END-APP-DEV.git/static/js/453.5f715be2.chunk.js",
-    "index.html": "/bling011/FRONT-END-APP-DEV.git/index.html",
-    "main.a85c44ee.css.map": "/bling011/FRONT-END-APP-DEV.git/static/css/main.a85c44ee.css.map",
-    "main.4b1c08d5.js.map": "/bling011/FRONT-END-APP-DEV.git/static/js/main.4b1c08d5.js.map",
-    "453.5f715be2.chunk.js.map": "/bling011/FRONT-END-APP-DEV.git/static/js/453.5f715be2.chunk.js.map"
+    "main.css": "/Todo-frontend/static/css/main.a85c44ee.css",
+    "main.js": "/Todo-frontend/static/js/main.9cb5d639.js",
+    "static/js/453.5f715be2.chunk.js": "/Todo-frontend/static/js/453.5f715be2.chunk.js",
+    "index.html": "/Todo-frontend/index.html",
+    "main.a85c44ee.css.map": "/Todo-frontend/static/css/main.a85c44ee.css.map",
+    "main.9cb5d639.js.map": "/Todo-frontend/static/js/main.9cb5d639.js.map",
+    "453.5f715be2.chunk.js.map": "/Todo-frontend/static/js/453.5f715be2.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.a85c44ee.css",
-    "static/js/main.4b1c08d5.js"
+    "static/js/main.9cb5d639.js"
   ]
 }
