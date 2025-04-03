@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/Todo-frontend/static/css/main.a85c44ee.css",
-    "main.js": "/Todo-frontend/static/js/main.fa037d05.js",
-    "static/js/453.5f715be2.chunk.js": "/Todo-frontend/static/js/453.5f715be2.chunk.js",
-    "index.html": "/Todo-frontend/index.html",
-    "main.a85c44ee.css.map": "/Todo-frontend/static/css/main.a85c44ee.css.map",
-    "main.fa037d05.js.map": "/Todo-frontend/static/js/main.fa037d05.js.map",
-    "453.5f715be2.chunk.js.map": "/Todo-frontend/static/js/453.5f715be2.chunk.js.map"
+    "main.css": "/FRONT-END-APP-DEV/static/css/main.a85c44ee.css",
+    "main.js": "/FRONT-END-APP-DEV/static/js/main.d5fc0ee5.js",
+    "static/js/453.5f715be2.chunk.js": "/FRONT-END-APP-DEV/static/js/453.5f715be2.chunk.js",
+    "index.html": "/FRONT-END-APP-DEV/index.html",
+    "main.a85c44ee.css.map": "/FRONT-END-APP-DEV/static/css/main.a85c44ee.css.map",
+    "main.d5fc0ee5.js.map": "/FRONT-END-APP-DEV/static/js/main.d5fc0ee5.js.map",
+    "453.5f715be2.chunk.js.map": "/FRONT-END-APP-DEV/static/js/453.5f715be2.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.a85c44ee.css",
-    "static/js/main.fa037d05.js"
+    "static/js/main.d5fc0ee5.js"
   ]
 }
