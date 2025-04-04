@@ -13,7 +13,6 @@ function App() {
   const [editingId, setEditingId] = useState(null);
   const [editText, setEditText] = useState('');
   const [isSaving, setIsSaving] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(null); // New error state
 
   useEffect(() => {
     fetchTodos();
@@ -30,8 +29,8 @@ function App() {
       const data = await getTodos();
       setTodos(data);
     } catch (error) {
-      setErrorMessage('Error fetching todos. Please try again later.');
       console.error('Error fetching todos:', error);
+      alert('Failed to fetch todos. Please check the server.');
     }
   };
 
@@ -42,10 +41,9 @@ function App() {
       const newTodoData = await addTodo(newTodo);
       setTodos(prevTodos => [...prevTodos, newTodoData]);
       setNewTodo('');
-      setErrorMessage(null); // Clear error on success
     } catch (error) {
-      setErrorMessage('Error adding todo. Please try again later.');
       console.error('Error adding todo:', error);
+      alert('Failed to add todo.');
     }
   };
 
@@ -56,10 +54,9 @@ function App() {
       setTodos(prevTodos =>
         prevTodos.map(todo => (todo.id === id ? updatedTodo : todo))
       );
-      setErrorMessage(null); // Clear error on success
     } catch (error) {
-      setErrorMessage('Error updating todo status. Please try again later.');
       console.error('Error updating completion status:', error);
+      alert('Failed to update completion status.');
     }
   };
 
@@ -69,11 +66,10 @@ function App() {
     setTodos(todos.filter(todo => todo.id !== id));
     try {
       await deleteTodo(id);
-      setErrorMessage(null); // Clear error on success
     } catch (error) {
       setTodos(prevTodos);
-      setErrorMessage('Error deleting todo. Please try again later.');
       console.error('Error deleting todo:', error);
+      alert('Failed to delete todo.');
     }
   };
 
@@ -96,10 +92,9 @@ function App() {
       );
       setEditingId(null);
       setEditText('');
-      setErrorMessage(null); // Clear error on success
     } catch (error) {
-      setErrorMessage('Error updating todo. Please try again later.');
       console.error('Error updating todo:', error);
+      alert('Failed to save edit.');
     } finally {
       setIsSaving(false);
     }
@@ -114,11 +109,7 @@ function App() {
 
   return (
     <div className={`app ${darkMode ? 'dark' : ''}`}>
-      <button 
-        className="toggle-dark-mode" 
-        onClick={() => setDarkMode(!darkMode)} 
-        aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
-      >
+      <button className="toggle-dark-mode" onClick={() => setDarkMode(!darkMode)}>
         {darkMode ? <Sun size={20} /> : <Moon size={20} />}
       </button>
       <h1>To-Do List</h1>
@@ -137,10 +128,6 @@ function App() {
         <button onClick={() => setFilter('Completed')}>Completed</button>
         <button onClick={() => setFilter('Pending')}>Pending</button>
       </div>
-
-      {/* Display error message if any */}
-      {errorMessage && <div className="error-message">{errorMessage}</div>}
-
       <ul className="todo-list">
         {filteredTodos.map(todo => (
           <li key={todo.id} className="todo-item">
