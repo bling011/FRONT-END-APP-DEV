@@ -23,6 +23,7 @@ function App() {
     document.body.classList.toggle('dark', darkMode);
   }, [darkMode]);
 
+  // Fetch todos from the backend
   const fetchTodos = async () => {
     try {
       const data = await getTodos();
@@ -32,6 +33,7 @@ function App() {
     }
   };
 
+  // Handle adding a new todo
   const handleAddTodo = async () => {
     if (!newTodo.trim()) return;
     try {
@@ -43,11 +45,10 @@ function App() {
     }
   };
 
+  // Handle toggling completion status
   const handleToggleComplete = async (id, completed) => {
     try {
-      // Update in backend first before updating UI
       const updatedTodo = await updateTodo(id, { completed: !completed });
-      
       setTodos(prevTodos =>
         prevTodos.map(todo => (todo.id === id ? updatedTodo : todo))
       );
@@ -56,6 +57,7 @@ function App() {
     }
   };
 
+  // Handle deleting a todo
   const handleDelete = async (id) => {
     const prevTodos = [...todos];
     setTodos(todos.filter(todo => todo.id !== id));
@@ -67,11 +69,13 @@ function App() {
     }
   };
 
+  // Handle editing a todo
   const handleEdit = (id, title) => {
     setEditingId(id);
     setEditText(title);
   };
 
+  // Handle saving edited todo
   const handleSaveEdit = async () => {
     if (!editText.trim()) return;
     setIsSaving(true);
@@ -91,6 +95,7 @@ function App() {
     }
   };
 
+  // Filter todos based on completion status
   const filteredTodos = todos.filter(todo => {
     if (filter === 'Completed') return todo.completed;
     if (filter === 'Pending') return !todo.completed;
