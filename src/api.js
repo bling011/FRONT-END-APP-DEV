@@ -1,33 +1,35 @@
-const BASE_URL = 'http://127.0.0.1:8000/api/todos/';
+const BASE_URL = "https://todo-app-backend-1-j1c6.onrender.com/api/todos/"; // Use your Render backend
 
-export const getTodos = async () => {
-  const response = await fetch(BASE_URL);
-  return response.json();
-};
+export async function getTodos() {
+    try {
+        const response = await fetch(`${BASE_URL}/api/todos/`);
+        if (!response.ok) {
+            throw new Error("Failed to fetch todos");
+        }
+        return await response.json();
+    } catch (error) {
+        console.error("Error fetching todos:", error);
+        return [];
+    }
+}
 
-export const addTodo = async (title) => {
-  const response = await fetch(BASE_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ title, completed: false }),
-  });
-  return response.json();
-};
+export async function addTodo(todoText) {
+    try {
+        const response = await fetch(`${BASE_URL}/api/todos/`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ text: todoText }),
+        });
 
-export const updateTodo = async (id, updatedFields) => {
-  const response = await fetch(`${BASE_URL}${id}/`, {
-    method: 'PATCH', 
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(updatedFields),
-  });
+        if (!response.ok) {
+            throw new Error("Failed to add todo");
+        }
 
-  if (!response.ok) {
-    const errorText = await response.text(); // Capture error response text
-    throw new Error(`Failed to update todo: ${errorText}`);
-  }
-  return response.json();
-};
-
-export const deleteTodo = async (id) => {
-  await fetch(`${BASE_URL}${id}/`, { method: 'DELETE' });
-};
+        return await response.json();
+    } catch (error) {
+        console.error("Error adding todo:", error);
+        return null;
+    }
+}
