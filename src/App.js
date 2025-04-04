@@ -23,18 +23,15 @@ function App() {
     document.body.classList.toggle('dark', darkMode);
   }, [darkMode]);
 
-  // Fetch todos from the backend
   const fetchTodos = async () => {
     try {
       const data = await getTodos();
       setTodos(data);
     } catch (error) {
       console.error('Error fetching todos:', error);
-      alert('Failed to fetch todos. Please check the server.');
     }
   };
 
-  // Handle adding a new todo
   const handleAddTodo = async () => {
     if (!newTodo.trim()) return;
     try {
@@ -43,24 +40,22 @@ function App() {
       setNewTodo('');
     } catch (error) {
       console.error('Error adding todo:', error);
-      alert('Failed to add todo.');
     }
   };
 
-  // Handle toggling completion status
   const handleToggleComplete = async (id, completed) => {
     try {
+      // Update in backend first before updating UI
       const updatedTodo = await updateTodo(id, { completed: !completed });
+      
       setTodos(prevTodos =>
         prevTodos.map(todo => (todo.id === id ? updatedTodo : todo))
       );
     } catch (error) {
       console.error('Error updating completion status:', error);
-      alert('Failed to update completion status.');
     }
   };
 
-  // Handle deleting a todo
   const handleDelete = async (id) => {
     const prevTodos = [...todos];
     setTodos(todos.filter(todo => todo.id !== id));
@@ -69,17 +64,14 @@ function App() {
     } catch (error) {
       setTodos(prevTodos);
       console.error('Error deleting todo:', error);
-      alert('Failed to delete todo.');
     }
   };
 
-  // Handle editing a todo
   const handleEdit = (id, title) => {
     setEditingId(id);
     setEditText(title);
   };
 
-  // Handle saving edited todo
   const handleSaveEdit = async () => {
     if (!editText.trim()) return;
     setIsSaving(true);
@@ -94,13 +86,11 @@ function App() {
       setEditText('');
     } catch (error) {
       console.error('Error updating todo:', error);
-      alert('Failed to save edit.');
     } finally {
       setIsSaving(false);
     }
   };
 
-  // Filter todos based on completion status
   const filteredTodos = todos.filter(todo => {
     if (filter === 'Completed') return todo.completed;
     if (filter === 'Pending') return !todo.completed;

@@ -1,51 +1,33 @@
 const BASE_URL = 'http://127.0.0.1:8000/api/todos/';
 
 export const getTodos = async () => {
-  try {
-    const response = await fetch(BASE_URL);
-    if (!response.ok) {
-      throw new Error(`Error fetching todos: ${response.status} ${response.statusText}`);
-    }
-    return await response.json();
-  } catch (error) {
-    console.error('Error fetching todos:', error);
-    throw error;
-  }
+  const response = await fetch(BASE_URL);
+  return response.json();
 };
 
-export const addTodo = async (title, description = '') => {
+export const addTodo = async (title) => {
   const response = await fetch(BASE_URL, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ title, description }),
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ title, completed: false }),
   });
-  if (!response.ok) {
-    throw new Error('Error adding todo');
-  }
-  return await response.json();
+  return response.json();
 };
 
-export const updateTodo = async (id, data) => {
+export const updateTodo = async (id, updatedFields) => {
   const response = await fetch(`${BASE_URL}${id}/`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
+    method: 'PATCH', 
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(updatedFields),
   });
+
   if (!response.ok) {
-    throw new Error('Error updating todo');
+    const errorText = await response.text(); // Capture error response text
+    throw new Error(`Failed to update todo: ${errorText}`);
   }
-  return await response.json();
+  return response.json();
 };
 
 export const deleteTodo = async (id) => {
-  const response = await fetch(`${BASE_URL}${id}/`, {
-    method: 'DELETE',
-  });
-  if (!response.ok) {
-    throw new Error('Error deleting todo');
-  }
+  await fetch(`${BASE_URL}${id}/`, { method: 'DELETE' });
 };
